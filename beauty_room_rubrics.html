@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Room — Рубрики для Instagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F0EB;
+  --text: #3B2F2F;
+  --soft: rgba(59,47,47,0.5);
+  --xsoft: rgba(59,47,47,0.25);
+
+  /* Рубрика 1 — закулісся: тепла кава */
+  --r1-bg: #2C1F1A;
+  --r1-card: #3A2820;
+  --r1-accent: #D4956A;
+  --r1-soft: rgba(212,149,106,0.6);
+  --r1-xsoft: rgba(212,149,106,0.3);
+  --r1-light: rgba(250,240,230,0.85);
+  --r1-muted: rgba(250,240,230,0.45);
+
+  /* Рубрика 2 — розваги: ігровий рожевий */
+  --r2-bg: #FBF0F4;
+  --r2-card: #FFFFFF;
+  --r2-accent: #E07B9A;
+  --r2-soft: rgba(224,123,154,0.6);
+  --r2-xsoft: rgba(224,123,154,0.25);
+  --r2-light: #3B2F2F;
+  --r2-muted: rgba(59,47,47,0.45);
+
+  /* Рубрика 3 — освіта: мудрий шавлій */
+  --r3-bg: #EBF2EE;
+  --r3-card: #F5FAF6;
+  --r3-accent: #5A8C6E;
+  --r3-soft: rgba(90,140,110,0.6);
+  --r3-xsoft: rgba(90,140,110,0.25);
+  --r3-light: #2B3D32;
+  --r3-muted: rgba(43,61,50,0.5);
+}
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  padding: 56px 24px 80px;
+  min-height: 100vh;
+}
+
+/* ── PAGE HEADER ── */
+.page-head {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.page-eyebrow {
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--soft); font-weight: 300; margin-bottom: 14px;
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px; font-weight: 400; color: var(--text);
+  line-height: 1.1; margin-bottom: 14px;
+}
+.page-title em { font-style: italic; }
+.page-sub {
+  font-size: 13px; color: var(--soft); font-weight: 300;
+  letter-spacing: 0.5px; max-width: 420px; margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 80px; }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  display: flex; align-items: flex-start; gap: 24px;
+  margin-bottom: 28px; padding-bottom: 24px;
+  border-bottom: 1px solid rgba(59,47,47,0.1);
+}
+.sec-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px; font-weight: 400; line-height: 1;
+  opacity: 0.08; color: var(--text); flex-shrink: 0;
+  margin-top: -8px;
+}
+.sec-meta { flex: 1; }
+.sec-tag {
+  display: inline-block;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px;
+  font-weight: 500; margin-bottom: 10px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 400; color: var(--text);
+  margin-bottom: 8px; line-height: 1.2;
+}
+.sec-title em { font-style: italic; }
+.sec-desc {
+  font-size: 13px; color: var(--soft); font-weight: 300;
+  line-height: 1.65; max-width: 580px;
+}
+.sec-freq {
+  flex-shrink: 0; text-align: right;
+  padding-top: 4px;
+}
+.freq-label {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--xsoft); display: block; margin-bottom: 4px;
+}
+.freq-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 400; color: var(--text);
+}
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+/* ── POST CARD ── */
+.post-card {
+  border-radius: 12px;
+  padding: 28px 26px 24px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+
+.card-art { position: absolute; inset: 0; pointer-events: none; }
+.card-body { position: relative; z-index: 2; }
+
+.card-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px; margin-bottom: 18px;
+  font-weight: 500;
+}
+.card-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px; letter-spacing: 2px;
+  margin-bottom: 6px; font-weight: 400;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 400; line-height: 1.25;
+  margin-bottom: 10px;
+}
+.card-title em { font-style: italic; }
+.card-desc {
+  font-size: 12px; line-height: 1.65; font-weight: 300;
+  letter-spacing: 0.2px; margin-bottom: 16px;
+}
+.card-caption {
+  font-size: 11px; font-style: italic; line-height: 1.6;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+.card-caption::before { content: '«'; margin-right: 2px; }
+.card-caption::after { content: '»'; margin-left: 2px; }
+.card-tags {
+  font-size: 10px; font-weight: 300; letter-spacing: 0.3px;
+}
+
+/* wide card spans 2 columns */
+.card-wide { grid-column: span 2; }
+@media (max-width: 700px) { .card-wide { grid-column: span 1; } }
+
+/* ═══════════════════════════════
+   РУБРИКА 1 — ЗАКУЛІССЯ (темна)
+═══════════════════════════════ */
+.r1 .sec-tag { background: rgba(212,149,106,0.15); color: var(--r1-accent); }
+.r1 .freq-val { color: var(--r1-accent); }
+
+.r1 .post-card { background: var(--r1-card); }
+
+/* декоративні елементи на темних картках */
+.r1 .post-card .card-art .glow {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,149,106,0.08) 0%, transparent 70%);
+}
+.r1 .post-card .card-art .glow-1 { width: 200px; height: 200px; top: -60px; right: -60px; }
+.r1 .post-card .card-art .line-h {
+  position: absolute; height: 1px;
+  background: rgba(212,149,106,0.08); left: 0; right: 0;
+}
+.r1 .post-card .card-art .line-h-1 { top: 60px; }
+.r1 .post-card .card-art .line-h-2 { bottom: 60px; }
+
+.r1 .post-card .card-chip {
+  background: rgba(212,149,106,0.12); color: var(--r1-accent);
+  border: 1px solid rgba(212,149,106,0.2);
+}
+.r1 .post-card .card-num { color: var(--r1-xsoft); }
+.r1 .post-card .card-title { color: var(--r1-light); }
+.r1 .post-card .card-desc { color: var(--r1-muted); }
+.r1 .post-card .card-caption {
+  background: rgba(212,149,106,0.08);
+  border-left: 2px solid rgba(212,149,106,0.3);
+  color: rgba(250,240,230,0.6);
+}
+.r1 .post-card .card-tags { color: var(--r1-xsoft); }
+
+/* інфо-блок для широкої картки */
+.r1-info { display: flex; gap: 24px; margin-top: 4px; flex-wrap: wrap; }
+.r1-info-item { flex: 1; min-width: 120px; }
+.r1-info-label {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--r1-xsoft); margin-bottom: 4px;
+}
+.r1-info-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; color: var(--r1-accent); font-weight: 400;
+}
+
+/* ═══════════════════════════════
+   РУБРИКА 2 — РОЗВАГИ (світла рожева)
+═══════════════════════════════ */
+.r2 .sec-tag { background: rgba(224,123,154,0.12); color: var(--r2-accent); }
+.r2 .freq-val { color: var(--r2-accent); }
+
+.r2 .post-card { background: var(--r2-card); border: 1px solid rgba(224,123,154,0.12); }
+
+.r2 .post-card .card-art .blob {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(224,123,154,0.06) 0%, transparent 70%);
+}
+.r2 .post-card .card-art .blob-1 { width: 180px; height: 180px; top: -50px; right: -50px; }
+.r2 .post-card .card-art .dots-dec {
+  position: absolute; bottom: 20px; right: 20px;
+  display: grid; grid-template-columns: repeat(3,6px); gap: 5px;
+}
+.r2 .post-card .card-art .dd { width: 4px; height: 4px; border-radius: 50%; background: rgba(224,123,154,0.2); }
+
+.r2 .post-card .card-chip {
+  background: rgba(224,123,154,0.1); color: var(--r2-accent);
+  border: 1px solid rgba(224,123,154,0.18);
+}
+.r2 .post-card .card-num { color: var(--r2-xsoft); }
+.r2 .post-card .card-title { color: var(--r2-light); }
+.r2 .post-card .card-desc { color: var(--r2-muted); }
+.r2 .post-card .card-caption {
+  background: rgba(224,123,154,0.06);
+  border-left: 2px solid rgba(224,123,154,0.25);
+  color: rgba(59,47,47,0.55);
+}
+.r2 .post-card .card-tags { color: var(--r2-xsoft); }
+
+/* варіанти відповідей для опитувань */
+.poll-options { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.poll-opt {
+  font-size: 11px; padding: 5px 12px; border-radius: 20px;
+  background: rgba(224,123,154,0.08);
+  border: 1px solid rgba(224,123,154,0.2);
+  color: var(--r2-accent); font-weight: 300;
+}
+
+/* ═══════════════════════════════
+   РУБРИКА 3 — ОСВІТА (шавлій)
+═══════════════════════════════ */
+.r3 .sec-tag { background: rgba(90,140,110,0.12); color: var(--r3-accent); }
+.r3 .freq-val { color: var(--r3-accent); }
+
+.r3 .post-card { background: var(--r3-card); border: 1px solid rgba(90,140,110,0.1); }
+
+.r3 .post-card .card-art .leaf-dec {
+  position: absolute; border-radius: 50% 0 50% 0;
+  opacity: 0.06; background: var(--r3-accent);
+}
+.r3 .post-card .card-art .leaf-1 { width: 120px; height: 120px; top: -30px; right: -30px; transform: rotate(20deg); }
+.r3 .post-card .card-art .leaf-2 { width: 70px; height: 70px; bottom: 10px; left: -20px; transform: rotate(-15deg); }
+
+.r3 .post-card .card-chip {
+  background: rgba(90,140,110,0.1); color: var(--r3-accent);
+  border: 1px solid rgba(90,140,110,0.18);
+}
+.r3 .post-card .card-num { color: var(--r3-xsoft); }
+.r3 .post-card .card-title { color: var(--r3-light); }
+.r3 .post-card .card-desc { color: var(--r3-muted); }
+.r3 .post-card .card-caption {
+  background: rgba(90,140,110,0.06);
+  border-left: 2px solid rgba(90,140,110,0.25);
+  color: rgba(43,61,50,0.55);
+}
+.r3 .post-card .card-tags { color: var(--r3-xsoft); }
+
+/* список кроків */
+.steps { list-style: none; margin-bottom: 14px; }
+.steps li {
+  font-size: 12px; color: var(--r3-muted);
+  padding: 5px 0; border-bottom: 1px solid rgba(90,140,110,0.08);
+  display: flex; align-items: baseline; gap: 10px; font-weight: 300;
+}
+.steps li:last-child { border-bottom: none; }
+.step-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px; color: var(--r3-accent);
+  flex-shrink: 0; font-style: italic;
+}
+
+/* myth card */
+.myth-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.myth-col { flex: 1; padding: 10px 12px; border-radius: 8px; }
+.myth-col-bad { background: rgba(224,80,80,0.05); border: 1px solid rgba(224,80,80,0.1); }
+.myth-col-good { background: rgba(90,140,110,0.06); border: 1px solid rgba(90,140,110,0.12); }
+.myth-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; font-weight: 500; }
+.myth-label-bad { color: rgba(200,80,80,0.6); }
+.myth-label-good { color: var(--r3-accent); }
+.myth-text { font-size: 11px; line-height: 1.5; font-weight: 300; color: var(--r3-muted); }
+
+/* ── LEGEND ── */
+.legend {
+  margin-top: 60px;
+  background: white;
+  border-radius: 16px;
+  padding: 32px 36px;
+  display: flex; gap: 48px; flex-wrap: wrap;
+  border: 1px solid rgba(59,47,47,0.06);
+}
+.legend-block { flex: 1; min-width: 200px; }
+.legend-title {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--xsoft); margin-bottom: 12px; font-weight: 500;
+}
+.legend-sched { display: flex; flex-direction: column; gap: 8px; }
+.sched-item { display: flex; align-items: center; gap: 12px; }
+.sched-day {
+  font-size: 11px; letter-spacing: 1px; color: var(--soft);
+  font-weight: 300; width: 80px; flex-shrink: 0;
+}
+.sched-pill {
+  font-size: 10px; padding: 3px 12px; border-radius: 20px; font-weight: 400;
+}
+.pill-1 { background: rgba(212,149,106,0.12); color: var(--r1-accent); }
+.pill-2 { background: rgba(224,123,154,0.1); color: var(--r2-accent); }
+.pill-3 { background: rgba(90,140,110,0.1); color: var(--r3-accent); }
+
+.legend-tips { flex: 2; min-width: 280px; }
+.tip-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
+.tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--xsoft); flex-shrink: 0; margin-top: 5px; }
+.tip-text { font-size: 12px; color: var(--soft); font-weight: 300; line-height: 1.5; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section { animation: fadeUp 0.6s ease both; }
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+.section:nth-child(4) { animation-delay: 0.3s; }
+.post-card { animation: fadeUp 0.5s ease both; }
+.post-card:nth-child(2) { animation-delay: 0.05s; }
+.post-card:nth-child(3) { animation-delay: 0.1s; }
+.post-card:nth-child(4) { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-head">
+  <p class="page-eyebrow">Beauty Room · Instagram · 2025</p>
+  <h1 class="page-title">Три рубрики<br><em>для твого салону</em></h1>
+  <p class="page-sub">Контент-план для жінок 25–40 · 2–3 пости на тиждень · Закулісся, розваги та освіта</p>
+</div>
+
+
+<!-- ══════════════════════════════ -->
+<!--  РУБРИКА 1: ЗАКУЛІССЯ          -->
+<!-- ══════════════════════════════ -->
+<div class="section r1">
+  <div class="sec-header">
+    <div class="sec-num">01</div>
+    <div class="sec-meta">
+      <span class="sec-tag">☕ Закулісся</span>
+      <h2 class="sec-title">«За лаштунками<br><em>Beauty Room»</em></h2>
+      <p class="sec-desc">Показуєш салон зсередини — людей, процеси, атмосферу. Жінки 25–40 купують довіру та відчуття «своїх». Цей контент будує лояльність краще за будь-яку рекламу.</p>
+    </div>
+    <div class="sec-freq">
+      <span class="freq-label">Частота</span>
+      <span class="freq-val">Вівторок</span>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- КАРТКА 1.1 -->
+    <div class="post-card">
+      <div class="card-art">
+        <div class="glow glow-1"></div>
+        <div class="line-h line-h-1"></div>
+        <div class="line-h line-h-2"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">👩‍💼 Команда</div>
+        <div class="card-num">Пост 1.1</div>
+        <h3 class="card-title">Знайомтесь —<br><em>це ваш майстер</em></h3>
+        <p class="card-desc">Серія постів про кожного майстра. Фото в роботі + особиста деталь: чому обрала цю професію, улюблена процедура, порада клієнткам.</p>
+        <div class="card-caption">Я займаюся мезотерапією вже 6 років. І досі обожнюю момент, коли клієнтка дивиться в дзеркало після процедури</div>
+        <div class="r1-info">
+          <div class="r1-info-item">
+            <div class="r1-info-label">Формат</div>
+            <div class="r1-info-val">Фото + текст</div>
+          </div>
+          <div class="r1-info-item">
+            <div class="r1-info-label">Залученість</div>
+            <div class="r1-info-val">Висока 🔥</div>
+          </div>
+        </div>
+        <div class="card-tags">#beautyroom #майстер #команда #бердичів</div>
+      </div>
+    </div>
+
+    <!-- КАРТКА 1.2 -->
+    <div class="post-card">
+      <div class="card-art">
+        <div class="glow glow-1"></div>
+        <div class="line-h line-h-1"></div>
+        <div class="line-h line-h-2"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">🌅 День у салоні</div>
+        <div class="card-num">Пост 1.2</div>
+        <h3 class="card-title">Як виглядає<br><em>наш ранок</em></h3>
+        <p class="card-desc">Фото або відео «до відкриття»: підготовка кабінету, ранкова кава, чисті рушники, аромат. Людяність та увага до деталей — це те, за що клієнтки повертаються.</p>
+        <div class="card-caption">7:45. Кабінет готовий. Свіжа кава. Ще тихо — але вже відчувається той особливий настрій перед гарним днем</div>
+        <div class="r1-info">
+          <div class="r1-info-item">
+            <div class="r1-info-label">Формат</div>
+            <div class="r1-info-val">Reels / фото</div>
+          </div>
+          <div class="r1-info-item">
+            <div class="r1-info-label">Час публ.</div>
+            <div class="r1-info-val">8–9 ранку</div>
+          </div>
+        </div>
+        <div class="card-tags">#ранок #салонкраси #beautyroom #затишок</div>
+      </div>
+    </div>
+
+    <!-- КАРТКА 1.3 WIDE -->
+    <div class="post-card card-wide">
+      <div class="card-art">
+        <div class="glow glow-1"></div>
+        <div class="line-h line-h-1"></div>
+        <div class="line-h line-h-2"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">🎓 Навчання</div>
+        <div class="card-num">Пост 1.3</div>
+        <h3 class="card-title">Ми щойно повернулись<br><em>з навчання</em></h3>
+        <p class="card-desc">Майстер поїхала на курс, конференцію або тренінг — покажи це. Фото зі сертифікатом, фото «за партою», коротке відео з процесу. Клієнтки цінують розвиток і хочуть знати, що їх майстер вчиться. Це підвищує довіру та ціну послуг у їхніх очах.</p>
+        <div class="card-caption">Цього місяця пройшла сертифікацію з нової техніки контурної пластики. Вже не терпиться поділитись результатами з вами 🤍</div>
+        <div class="r1-info">
+          <div class="r1-info-item">
+            <div class="r1-info-label">Формат</div>
+            <div class="r1-info-val">Фото / карусель</div>
+          </div>
+          <div class="r1-info-item">
+            <div class="r1-info-label">Мета</div>
+            <div class="r1-info-val">Довіра + статус</div>
+          </div>
+          <div class="r1-info-item">
+            <div class="r1-info-label">CTA</div>
+            <div class="r1-info-val">Записатись першою</div>
+          </div>
+        </div>
+        <div class="card-tags">#навчання #сертифікація #майстер #beautyroom</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════ -->
+<!--  РУБРИКА 2: РОЗВАГИ            -->
+<!-- ══════════════════════════════ -->
+<div class="section r2">
+  <div class="sec-header">
+    <div class="sec-num">02</div>
+    <div class="sec-meta">
+      <span class="sec-tag">🎀 Розваги</span>
+      <h2 class="sec-title">«Тест від<br><em>Beauty Room»</em></h2>
+      <p class="sec-desc">Інтерактивний контент — тести, опитування, «вгадай», «обери А чи Б». Підвищує охоплення через коментарі та Stories. Жінки 25–40 це обожнюють — відчуття гри без зусиль.</p>
+    </div>
+    <div class="sec-freq">
+      <span class="freq-label">Частота</span>
+      <span class="freq-val">Четвер</span>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- КАРТКА 2.1 -->
+    <div class="post-card">
+      <div class="card-art">
+        <div class="blob blob-1"></div>
+        <div class="dots-dec"><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">🧪 Тест</div>
+        <div class="card-num">Пост 2.1</div>
+        <h3 class="card-title"><em>«Яка ти</em><br>клієнтка?»</h3>
+        <p class="card-desc">Карусель з 4–5 питаннями: стиль догляду, улюблена процедура, поведінка в салоні. В кінці — тип («Перфекціоністка», «Релакс-дівчина», «Експерементаторка»). Просиш поділитись результатом у коментарях.</p>
+        <div class="poll-options">
+          <span class="poll-opt">Перфекціоністка 🎯</span>
+          <span class="poll-opt">Релакс-дівчина 🛁</span>
+          <span class="poll-opt">Експерементаторка ✨</span>
+          <span class="poll-opt">Мінімалістка 🤍</span>
+        </div>
+        <div class="card-caption">Напиши свій тип у коментарях — цікаво дізнатись, кого серед нас більше!</div>
+        <div class="card-tags">#тест #салонкраси #beautyroom #типклієнтки</div>
+      </div>
+    </div>
+
+    <!-- КАРТКА 2.2 -->
+    <div class="post-card">
+      <div class="card-art">
+        <div class="blob blob-1"></div>
+        <div class="dots-dec"><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">🗳️ Опитування</div>
+        <div class="card-num">Пост 2.2</div>
+        <h3 class="card-title">А або Б —<br><em>обираєш ти</em></h3>
+        <p class="card-desc">Stories або пост з дилемою краси. Без правильної відповіді — просто думка. Провокує коментарі та збереження, бо кожна хоче обговорити.</p>
+        <div class="poll-options">
+          <span class="poll-opt">Ін'єкції 💉</span>
+          <span class="poll-opt">Апаратне 🔮</span>
+        </div>
+        <div class="poll-options">
+          <span class="poll-opt">Пілінг 🍑</span>
+          <span class="poll-opt">Маска 🌿</span>
+        </div>
+        <div class="poll-options">
+          <span class="poll-opt">Вранці в салон ☀️</span>
+          <span class="poll-opt">Ввечері після роботи 🌙</span>
+        </div>
+        <div class="card-tags">#абоб #опитування #beautyroom #краса</div>
+      </div>
+    </div>
+
+    <!-- КАРТКА 2.3 WIDE -->
+    <div class="post-card card-wide">
+      <div class="card-art">
+        <div class="blob blob-1"></div>
+        <div class="dots-dec"><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div><div class="dd"></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">🔍 Вгадай</div>
+        <div class="card-num">Пост 2.3</div>
+        <h3 class="card-title"><em>«Вгадай процедуру»</em><br>по фото шкіри</h3>
+        <p class="card-desc">Крупне фото шкіри до/після або фото інструменту/препарату. Питаєш: «Яка це процедура?» Варіанти відповідей у каруселі або в коментарях. Наступного дня — відповідь + короткий опис процедури. Чудово для залученості та навчання одночасно.</p>
+        <div class="poll-options">
+          <span class="poll-opt">Мезотерапія?</span>
+          <span class="poll-opt">Біоревіталізація?</span>
+          <span class="poll-opt">RF-ліфтинг?</span>
+          <span class="poll-opt">Хімічний пілінг?</span>
+        </div>
+        <div class="card-caption">Підказка: ця процедура не потребує відновлення, результат помітний вже наступного ранку ✨</div>
+        <div class="r1-info" style="--r1-accent: var(--r2-accent); --r1-xsoft: var(--r2-xsoft);">
+          <div class="r1-info-item">
+            <div class="r1-info-label" style="color:var(--r2-xsoft)">Формат</div>
+            <div class="r1-info-val" style="color:var(--r2-accent)">2 пости підряд</div>
+          </div>
+          <div class="r1-info-item">
+            <div class="r1-info-label" style="color:var(--r2-xsoft)">Охоплення</div>
+            <div class="r1-info-val" style="color:var(--r2-accent)">Дуже високе 🚀</div>
+          </div>
+          <div class="r1-info-item">
+            <div class="r1-info-label" style="color:var(--r2-xsoft)">Бонус</div>
+            <div class="r1-info-val" style="color:var(--r2-accent)">Збереження ❤️</div>
+          </div>
+        </div>
+        <div class="card-tags">#вгадай #гра #beautyroom #процедура</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════ -->
+<!--  РУБРИКА 3: ОСВІТА             -->
+<!-- ══════════════════════════════ -->
+<div class="section r3">
+  <div class="sec-header">
+    <div class="sec-num">03</div>
+    <div class="sec-meta">
+      <span class="sec-tag">🌿 Освіта</span>
+      <h2 class="sec-title">«Майстер<br><em>пояснює»</em></h2>
+      <p class="sec-desc">Коротко та зрозуміло про догляд, процедури та міфи. Такі пости зберігають у закладки — а це найкращий сигнал для алгоритму Instagram. Позиціонує тебе як експерта.</p>
+    </div>
+    <div class="sec-freq">
+      <span class="freq-label">Частота</span>
+      <span class="freq-val">Субота</span>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- КАРТКА 3.1 -->
+    <div class="post-card">
+      <div class="card-art">
+        <div class="leaf-dec leaf-1"></div>
+        <div class="leaf-dec leaf-2"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">📋 Покроково</div>
+        <div class="card-num">Пост 3.1</div>
+        <h3 class="card-title">5 кроків догляду<br><em>після пілінгу</em></h3>
+        <p class="card-desc">Карусель або текст — що робити (і що НЕ робити) після процедури. Клієнтки зберігають, щоб не забути. Плюс — це знижує тривогу і підвищує задоволеність результатом.</p>
+        <ul class="steps">
+          <li><span class="step-n">01</span> Не торкатись обличчя руками 24 год</li>
+          <li><span class="step-n">02</span> Тільки м'який очищувач без кислот</li>
+          <li><span class="step-n">03</span> Зволожувач з пантенолом або алое</li>
+          <li><span class="step-n">04</span> SPF 50 щодня, навіть вдома</li>
+          <li><span class="step-n">05</span> Ніякого спорту та сауни 3 дні</li>
+        </ul>
+        <div class="card-tags">#доглядпіслепілінгу #поради #майстерпояснює #beautyroom</div>
+      </div>
+    </div>
+
+    <!-- КАРТКА 3.2 -->
+    <div class="post-card">
+      <div class="card-art">
+        <div class="leaf-dec leaf-1"></div>
+        <div class="leaf-dec leaf-2"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">💡 Міф vs Факт</div>
+        <div class="card-num">Пост 3.2</div>
+        <h3 class="card-title"><em>«Філери старять»</em> —<br>розвіюємо міф</h3>
+        <p class="card-desc">Бери популярний міф і розбиваєш його на два стовпці. Провокує обговорення — у коментарях одразу з'являються ті, хто вірив у міф і дякує за пояснення.</p>
+        <div class="myth-row">
+          <div class="myth-col myth-col-bad">
+            <div class="myth-label myth-label-bad">❌ Міф</div>
+            <div class="myth-text">Філери розтягують шкіру і після них вигляд стає гірший</div>
+          </div>
+          <div class="myth-col myth-col-good">
+            <div class="myth-label myth-label-good">✓ Факт</div>
+            <div class="myth-text">При правильному введенні філери стимулюють колаген і зберігають природний вигляд</div>
+          </div>
+        </div>
+        <div class="card-tags">#міф #філери #майстерпояснює #beautyroom</div>
+      </div>
+    </div>
+
+    <!-- КАРТКА 3.3 WIDE -->
+    <div class="post-card card-wide">
+      <div class="card-art">
+        <div class="leaf-dec leaf-1"></div>
+        <div class="leaf-dec leaf-2"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-chip">🔬 Порівняння</div>
+        <div class="card-num">Пост 3.3</div>
+        <h3 class="card-title">Мезотерапія vs<br><em>Біоревіталізація</em> — у чому різниця?</h3>
+        <p class="card-desc">Одне з найпоширеніших питань клієнток — вони часто не розуміють різниці між схожими процедурами. Карусель з простим поясненням: що, кому і коли. В кінці — CTA «Не знаєш що обрати? Запишись на консультацію». Такі пости зберігають і пересилають подругам — безкоштовна реклама.</p>
+        <div class="myth-row">
+          <div class="myth-col" style="background:rgba(90,140,110,0.05);border:1px solid rgba(90,140,110,0.1)">
+            <div class="myth-label" style="color:var(--r3-accent)">🌿 Мезотерапія</div>
+            <div class="myth-text">Коктейль вітамінів + гіалурон. Для профілактики і тьмяної шкіри. Від 25 років.</div>
+          </div>
+          <div class="myth-col" style="background:rgba(100,140,190,0.05);border:1px solid rgba(100,140,190,0.1)">
+            <div class="myth-label" style="color:#6080B0">💧 Біоревіталізація</div>
+            <div class="myth-text">Чистий гіалурон, глибоке зволоження. Для сухої та зневодненої шкіри. Від 30 років.</div>
+          </div>
+        </div>
+        <div class="card-caption">Не знаєш що підійде саме тобі? Напиши нам — підберемо індивідуально</div>
+        <div class="card-tags">#мезотерапія #біоревіталізація #порівняння #майстерпояснює</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ── РОЗКЛАД + ПОРАДИ ── -->
+<div class="legend">
+  <div class="legend-block">
+    <div class="legend-title">Розклад тижня</div>
+    <div class="legend-sched">
+      <div class="sched-item">
+        <span class="sched-day">Вівторок</span>
+        <span class="sched-pill pill-1">☕ Закулісся</span>
+      </div>
+      <div class="sched-item">
+        <span class="sched-day">Четвер</span>
+        <span class="sched-pill pill-2">🎀 Розваги</span>
+      </div>
+      <div class="sched-item">
+        <span class="sched-day">Субота</span>
+        <span class="sched-pill pill-3">🌿 Освіта</span>
+      </div>
+      <div class="sched-item" style="margin-top:4px">
+        <span class="sched-day" style="color:rgba(59,47,47,0.35);font-size:10px">+щодня</span>
+        <span style="font-size:10px;color:rgba(59,47,47,0.3);font-weight:300">Stories — до/після, питання дня</span>
+      </div>
+    </div>
+  </div>
+  <div class="legend-tips">
+    <div class="legend-title">Поради по веденню</div>
+    <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">Завжди закінчуй пост питанням — це підвищує коментарі та охоплення</div></div>
+    <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">Освітні пости та тести — публікуй у суботу, коли жінки більше часу у телефоні</div></div>
+    <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">Закулісся — в будні вранці (8–10) або після роботи (18–20)</div></div>
+    <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">Раз на місяць — пост з відгуком клієнтки (текст або Reels). Найкращий продаж</div></div>
+    <div class="tip-row"><div class="tip-dot"></div><div class="tip-text">Не видаляй пости з низьким охопленням — алгоритм дооцінює їх через тиждень</div></div>
+  </div>
+</div>
+
+</body>
+</html>
